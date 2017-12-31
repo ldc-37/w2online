@@ -1,0 +1,41 @@
+<html>
+<head>
+<script>
+var myHeaders = new Headers();
+myHeaders.append("Content-Type","application/x-www-form-urlencoded");
+var myInit = {
+    method:'POST',
+    headers:myHeaders,
+    body:"name=汉森"
+}
+var myRequest = new Request("https://blog.zsxsoft.com/w2tmp/post.php",myInit);
+fetch(myRequest).then(function(response) {
+    return response.json().then(function(json) {
+        if(json.error === 0) {
+            document.write(json.message);
+        }
+    })
+})
+
+/**
+fetch(url, {
+  method: "POST",
+  body: JSON.stringify(data),
+  headers: {
+    "Content-Type": "application/json"
+  },
+  credentials: "same-origin"
+}).then(function(response) {
+  response.status     //=> number 100–599
+  response.statusText //=> String
+  response.headers    //=> Headers
+  response.url        //=> String
+
+  return response.text()
+}, function(error) {
+  error.message //=> String
+})
+**/
+</script>
+<head>
+</html>
