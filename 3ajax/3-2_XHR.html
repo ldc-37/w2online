@@ -1,0 +1,18 @@
+<html>
+<head>
+<script>
+var request = new XMLHttpRequest();
+request.open("POST","https://blog.zsxsoft.com/w2tmp/post.php",true);
+request.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+request.send("name=汉森");
+request.onreadystatechange = function(){
+    if(request.readyState === 4 && request.status === 200){
+        var data = JSON.parse(request.responseText);
+        if(!data.error){
+            document.write(data.message);
+        }
+    }
+}
+</script>
+<head>
+</html>
