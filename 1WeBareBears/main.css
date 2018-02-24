@@ -1,0 +1,19 @@
+body{font-family: "黑体";}
+.likeUs,.backGround,.mainActors,.honorRecord>p{text-align: center;}
+.navigator{text-align: right;margin: 0 33% 0 auto;}
+.navigator div{display: inline;font-size: 14px;font-family: "Microsoft YaHei";}
+.navigator div a{text-decoration: none;color: black;}
+.navigator div:hover{text-decoration:underline;}
+#a{font-family: "Microsoft YaHei";}
+#introLeft{float: left;width: 49%;text-align: right}
+#introRight{height: 280px; float: right;width: 47%;}
+.tg{border-collapse:collapse;border-spacing:0;margin:0px auto;}
+.tg td{font-size: 15px;padding:10px 19px;border-style: solid;border-width: 2px;word-break:normal;}
+.tg .tg-baqh{text-align: center;vertical-align: top}
+#bears3{position: relative;top: -180px;left: 57%;}
+hr{width: 600px; height: 2.5px; background-color: black;}
+.mainActors{margin-top: 400px;}
+.mainActors p{width: 8%; font-size: 20px; background-color: white;text-align: center;margin: -20px auto 20px auto;}
+.likeUs{margin-top: -100px;}
+.likeUs p{margin-right:150px;font-size: 20px;}
+.likeUs form{margin-right: 100px;}

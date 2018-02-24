@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>West2Online 2017 JavaScript Task 02</title>
+  </head>
+<body>
+
+  <h3>麦当劳便宜的汉堡</h3>
+  <ul id="mcdonalds-list">
+  <!--
+    样例，请删除。
+    <li>1. 汉堡包，7元（样例）</li>
+    <li>2. 吉士汉堡包，8元（样例）</li>
+  -->
+  </ul>
+
+<script>
+
+  // 不，这不是我的个人口味
+  // 我只是复制自麦当劳官网
+  var burgersData = [
+    ['汉堡包', 7],
+    ['吉士汉堡包', 8],
+    ['双层吉士汉堡', 15.5],
+    ['麦香鸡', 9],
+    ['麦香鱼', 15.5],
+    ['麦辣鸡腿汉堡', 15],
+    ['培根蔬萃双层牛堡', 18],
+    ['巨无霸', 17],
+    ['原味板烧鸡腿堡', 16.5],
+    ['吉士蛋堡', 6],
+  ];
+
+  (function () {
+    /**
+     * 在注释下方编写代码
+     * 遍历读取burgersData中各个汉堡的数据
+     * 将15元以下的汉堡输出到mcdonalds-list去
+     */
+    var list = "";
+    for(var i=0;i<burgersData.length;i++){
+      if(burgersData[i][1]<=15){
+        list += "<li>"+burgersData[i][0]+"</li>";
+      }
+    }
+    document.getElementById("mcdonalds-list").innerHTML = list;
+  })();
+
+</script>
+</body>
+</html>

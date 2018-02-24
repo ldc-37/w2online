@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>West2Online 2017 JavaScript Task 01</title>
+  </head>
+<body>
+
+  <p>魔镜魔镜告诉我，谁是世界上最美的人？</p>
+  <p>&nbsp;</p>
+  <p><input id="most-beautiful-input" type="text" /><button id="button" onclick="beautiful()">告诉他</button></p>
+  <p>&nbsp;</p>
+  <div>呀，原来<span id="most-beautiful-output">汉堡包</span>才是世界上最美的人呢！</div>
+
+  <script>
+  function beautiful() {
+    /**
+     * 在注释下方写下代码
+     * 给按钮button绑定一个点击事件
+     * 在事件处理函数中
+     * 获取most-beautiful-input输入的值，并显示在most-beautiful-output中
+     *
+     * 另外，当检测到输入的值是“汉堡包”的时候，弹窗提示：“没错！我也是这么想的！”
+     */
+    var input = document.getElementById("most-beautiful-input").value;
+    document.getElementById("most-beautiful-output").innerHTML = input;
+    if(input=="汉堡包"){
+      alert("没错！我也是这么想的！");
+    }
+  }
+  </script>
+</body>
+</html>

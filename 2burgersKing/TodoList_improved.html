@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo-List</title>
+    <style>
+        .del{color: red;font-size: 15px;}
+        .mod{color: blue;font-size: 15px;}
+        .finish{color: green;font-size: 15px;}
+        .finished{text-decoration: line-through;}
+        body{background:url(http://i4.bvimg.com/631158/494297307307199f.png) repeat;text-align: center;font-size: 20px;font-weight: bold;}
+        li{list-style: none;background: white;width: 50%;margin: auto;}
+        button{width: 50px;height: 25px;font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="list"></ul>
+    <button id="btn-add" onclick="add()">Add</button>
+    <button id="btn-cls" onclick="clearAll()">Clear</button>
+</body>
+<script>
+    "use strict";
+
+    var list = document.getElementById("list");
+    var a1,a2,a3;
+
+    function CreateOperationBtn(){
+        a1 = document.createElement("a");
+        a1.href = "javascript:void(0)";
+        a1.className = "del";
+        a1.innerText = "[Del]";
+        a1.onclick = function() {
+            this.parentElement.remove(this.parentNode);
+        };
+        
+        a2 = document.createElement("a");
+        a2.href = "javascript:void(0)";
+        a2.className = "mod";
+        a2.innerText = "[Mod]";
+        a2.onclick = function() {
+            var newItem = prompt("change");
+            if(newItem!=null){
+                this.parentNode.firstChild.nodeValue = newItem;//ATTENTION : nodeValue;
+            }
+        };
+
+        a3 = document.createElement("a");
+        a3.href = "javascript:void(0)";
+        a3.innerText = "[Finish!]";
+        a3.className = "finish";
+        a3.onclick = function() {
+            this.parentNode.setAttribute("class","finished");
+        };
+    }
+
+    function add(){
+        var item = prompt("What do you to add into your todo list?");
+        if(item!=null){
+            var li = document.createElement("li");
+            li.innerText = item;
+            CreateOperationBtn();
+            li.appendChild(a1);
+            li.appendChild(a2);
+            li.appendChild(a3);
+            list.appendChild(li);
+        }
+    }
+    function clearAll(){
+        if(confirm("WARNING:You are deleting all items!")){
+            list.innerHTML = "";
+        }
+    }
+</script>
+</html>
