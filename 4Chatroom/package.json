@@ -1,0 +1,9 @@
+{
+    "name": "socket-chatroom",
+    "version": "0.1",
+    "description": "test",
+    "dependencies": {
+        "express": "^4.10.2",
+        "socket.io": "^2.0.4"
+    }
+}

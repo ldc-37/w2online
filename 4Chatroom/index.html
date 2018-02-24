@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatroom</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        h1 {text-align: center;margin-top: 1%;}
+        body {margin: 0; padding: 0;background: url(http://i1.bvimg.com/631158/eefcdc6433f77f4c.jpg) repeat;}
+        textarea {position: fixed;width: 80%;margin-left: 8%;font-size: 18px;border: 3px solid #7FFF00;}
+        button{float: right;width: 5%;margin-right: 7%;padding: 12px;background-color: yellow;font: bold 15px "Microsoft YaHei";}
+        .sending {width: 100%;position: fixed;bottom: 3%;opacity: 0.8;}
+        .history {position: absolute;height: 80%;width: 90%;left: 5%;margin-bottom: 5%;border: 2px dashed black;overflow-y: auto;}
+        #chat {margin: 1% 10% 0;padding: 0;list-style: none;font-size: 20px;}
+        #chat li {padding: 5px 20px;background: rgba(88,105,180,0.1);}
+        #chat li:nth-child(odd) {background: rgba(88,105,180,0.5);}
+    </style>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+<body>
+    <h1>Chatroom v0.1</h1>
+    <div class="history">
+        <ul id="chat"></ul>
+            <!-- <form>
+                <input type="text" name="username">
+            </form> -->
+    </div>
+    <div class="sending">
+        <form action="">
+            <textarea id="msg" name="message"></textarea>
+            <button>Send</button>
+        </form>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      $('form').submit(function(){
+          socket.emit('chat message', $('#msg').val());
+          $('#msg').val('');
+          return false;
+      });
+      socket.on('chat message', function(msg){
+          $('#chat').append($('<li>').text(msg));
+      });
+    </script>
+</body>
+</html>
