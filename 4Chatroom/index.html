@@ -11,6 +11,7 @@
         button{float: right;width: 5%;margin-right: 7%;padding: 12px;background-color: yellow;font: bold 15px "Microsoft YaHei";}
         .sending {width: 100%;position: fixed;bottom: 3%;opacity: 0.8;}
         .history {position: absolute;height: 80%;width: 90%;left: 5%;margin-bottom: 5%;border: 2px dashed black;overflow-y: auto;}
+        .auto-bottom {position: absolute;bottom: 100%;font-size: 15px;cursor: pointer;}
         #chat {margin: 1% 10% 0;padding: 0;list-style: none;font-size: 20px;}
         #chat li {padding: 5px 20px;background: rgba(88,105,180,0.1);}
         #chat li:nth-child(odd) {background: rgba(88,105,180,0.5);}
@@ -29,21 +30,26 @@
     <div class="sending">
         <form action="">
             <textarea id="msg" name="message"></textarea>
+            <input type="checkbox" id="auto" class="auto-bottom" style="right: 10%;width: 15px;height: 15px;">
+            <label for="auto" class="auto-bottom" title="Auto scroll to the bottom when new message come" style="right: 8%">Auto</label>
             <button>Send</button>
         </form>
     </div>
     
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io();
-      $('form').submit(function(){
-          socket.emit('chat message', $('#msg').val());
-          $('#msg').val('');
-          return false;
-      });
-      socket.on('chat message', function(msg){
-          $('#chat').append($('<li>').text(msg));
-      });
-    </script>
+        var socket = io();
+        $('form').submit(function(){
+            socket.emit('chat message', $('#msg').val());
+            $('#msg').val('');
+            return false;
+        });
+        socket.on('chat message', function(msg){
+            $('#chat').append($('<li>').text(msg));
+            if($("#auto")[0].checked){
+                $(".history")[0].scrollTop = $(".history")[0].scrollHeight;
+            }
+        });
+        </script>
 </body>
 </html>
