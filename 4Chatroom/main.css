@@ -1,0 +1,11 @@
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        h1 {text-align: center;margin-top: 1%;font-family: "Microsoft YaHei";}
+        body {margin: 0; padding: 0;background: url(http://i1.bvimg.com/631158/eefcdc6433f77f4c.jpg) repeat;}
+        textarea {position: fixed;width: 80%;margin-left: 8%;font-size: 18px;border: 3px solid #7FFF00;}
+        button{float: right;width: 5%;margin-right: 7%;padding: 12px;background-color: yellow;font: bold 15px "Microsoft YaHei";}
+        .sending {width: 100%;position: fixed;bottom: 3%;opacity: 0.8;}
+        .history {position: absolute;height: 80%;width: 90%;left: 5%;margin-bottom: 5%;border: 2px dashed black;overflow-y: auto;}
+        .auto-bottom {position: absolute;bottom: 100%;font-size: 15px;cursor: pointer;}
+        #chat {margin: 1% 10% 0;padding: 0;list-style: none;font-size: 20px;}
+        #chat li {padding: 5px 20px;background: rgba(88,105,180,0.1);}
+        #chat li:nth-child(odd) {background: rgba(88,105,180,0.5);}

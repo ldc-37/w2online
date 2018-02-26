@@ -2,18 +2,18 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var ol = 0;
+var userOnline = 0;
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket){
-	ol++;
-	console.log('a user connected.now online ' + ol);
+	userOnline++;
+	console.log('a user connected.now online ' + userOnline);
 	socket.on('disconnect', function(){
-		ol--;
-		console.log('user disconnected.now online ' + ol);
+		userOnline--;
+		console.log('user disconnected.now online ' + userOnline);
 	});
 	
 	socket.on('chat message', function(msg){
