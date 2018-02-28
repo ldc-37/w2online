@@ -10,6 +10,7 @@ textarea {position: fixed;width: 80%;margin-left: 8%;font-size: 18px;border: 3px
 .login input {background-color: transparent;border: none;border-bottom: 2px solid white;width: 300px;height: 60px;color: white;font-size: 30px;letter-spacing: 2px;text-align: center;}
 .login button {background-color: transparent;width: 100px;height: 50px;color: white;font-size: 20px;}
 .login-text {margin: 13%;}
+.user-join-leave {text-align: center;font-weight: bold;}
 #chat {margin: 1% 10% 0;padding: 0;list-style: none;font-size: 20px;}
 #chat li {padding: 5px 20px;background: rgba(88,105,180,0.1);}
 #chat li:nth-child(odd) {background: rgba(88,105,180,0.5);}

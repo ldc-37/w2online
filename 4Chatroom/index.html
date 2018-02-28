@@ -7,11 +7,11 @@
 </head>
 <body>
     <h1>Chatroom</h1>
-    <div class="login" style="display: none;">
+    <div class="login">
         <div class="login-text">
             <h3>Welcome!<br>Please input your nickname:</h3>
             <form>
-                <input type="text" name="username" id="username">
+                <input type="text" name="username" id="username" maxlength="12">
                 <br><br>
                 <button>Enter</button>
             </form>
@@ -33,7 +33,33 @@
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         var socket = io.connect('http://localhost:3000');
+        var username = null;
 
+        //Login
+        $('.login form').submit(function(event){
+            event.preventDefault();
+            username = $('#username').val();
+            if(username!=''){
+                socket.emit('login',username);
+                $('.login').hide('1000');
+            }
+            else{
+                alert("Nickname can't be empty!")
+            }
+        });
+
+        //Broadcast login
+        socket.on('userLogin',function(name){
+            var content = '<div class="user-join-leave">————Welcome ' + name +' join————</div>';
+            $('#chat').append(content);
+        })
+        //Broadcast logout
+        socket.on('userLogout',function(name){
+            var content = '<div class="user-join-leave">————User ' + name +' leave————</div>';
+            $('#chat').append(content);
+        })
+
+        //Send message
         function sendMsg(){
             socket.emit('message', $('#msg').val());
             $('#msg').val('');
@@ -47,8 +73,9 @@
                 event.preventDefault();
                 sendMsg();
             }
-        });//if not 'keyup',the '\n' will left after val('')
-
+        });
+        
+        //Receive message
         socket.on('broadcast', function(data){
             $('#chat').append($('<li>').text(data));
             if($("#auto")[0].checked){
