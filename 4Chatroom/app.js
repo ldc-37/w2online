@@ -16,9 +16,9 @@ io.on('connection', function(socket){
 		console.log('user disconnected.now online ' + userOnline);
 	});
 	
-	socket.on('chat message', function(msg){
-		console.log('message: ' + msg);
-		io.emit('chat message', msg);
+	socket.on('message', function(data){
+		console.log('send message: ' + data);
+		io.emit('broadcast', data);
 	});
 });
 

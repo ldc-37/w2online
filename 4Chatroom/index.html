@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <title>Chatroom</title>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 </head>
 <body>
     <h1>Chatroom</h1>
+    <div class="login" style="display: none;">
+        <div class="login-text">
+            <h3>Welcome!<br>Please input your nickname:</h3>
+            <form>
+                <input type="text" name="username" id="username">
+                <br><br>
+                <button>Enter</button>
+            </form>
+        </div>
+    </div>
     <div class="history">
         <ul id="chat"></ul>
-            <!-- <form>
-                <input type="text" name="username">
-            </form> -->
     </div>
     <div class="sending">
         <form action="">
@@ -25,15 +30,27 @@
     </div>
     
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
         var socket = io.connect('http://localhost:3000');
-        $('form').submit(function(){
-            socket.emit('chat message', $('#msg').val());
+
+        function sendMsg(){
+            socket.emit('message', $('#msg').val());
             $('#msg').val('');
+        }
+        $('.sending form').submit(function(){
+            sendMsg();
             return false;
         });
-        socket.on('chat message', function(msg){
-            $('#chat').append($('<li>').text(msg));
+        $('.sending textarea').keypress(function(event){
+		    if(event.keyCode === 13){
+                event.preventDefault();
+                sendMsg();
+            }
+        });//if not 'keyup',the '\n' will left after val('')
+
+        socket.on('broadcast', function(data){
+            $('#chat').append($('<li>').text(data));
             if($("#auto")[0].checked){
                 $(".history")[0].scrollTop = $(".history")[0].scrollHeight;
             }
