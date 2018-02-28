@@ -5,12 +5,14 @@ textarea {position: fixed;width: 80%;margin-left: 8%;font-size: 18px;border: 3px
 .sending button{float: right;width: 5%;margin-right: 7%;padding: 12px;background-color: yellow;font: bold 15px "Microsoft YaHei";}
 .sending {width: 100%;position: fixed;bottom: 3%;opacity: 0.8;}
 .history {position: absolute;height: 80%;width: 90%;left: 5%;margin-bottom: 5%;border: 2px dashed black;overflow-y: auto;}
-.auto-bottom {position: absolute;bottom: 100%;font-size: 15px;cursor: pointer;}
+.auto-chkbox {position: absolute;bottom: 100%;font-size: 15px;cursor: pointer;}
 .login {position: absolute;background: black;font: 30px "Comic Sans MS";color: white;width: 100%;height: 100%;z-index: 999;text-align: center;}
 .login input {background-color: transparent;border: none;border-bottom: 2px solid white;width: 300px;height: 60px;color: white;font-size: 30px;letter-spacing: 2px;text-align: center;}
 .login button {background-color: transparent;width: 100px;height: 50px;color: white;font-size: 20px;}
 .login-text {margin: 13%;}
-.user-join-leave {text-align: center;font-weight: bold;}
+.user-join-leave {text-align: center;}
 #chat {margin: 1% 10% 0;padding: 0;list-style: none;font-size: 20px;}
 #chat li {padding: 5px 20px;background: rgba(88,105,180,0.1);}
 #chat li:nth-child(odd) {background: rgba(88,105,180,0.5);}
+#showName {position: fixed;left: 6%;top: 5%;}
+#showUserOnline {position: fixed;right: 6%;top: 5%;}

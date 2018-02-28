@@ -17,14 +17,16 @@
             </form>
         </div>
     </div>
+    <span id="showName"></span>
+    <span id="showUserOnline"></span>
     <div class="history">
         <ul id="chat"></ul>
     </div>
     <div class="sending">
         <form action="">
             <textarea id="msg" name="message"></textarea>
-            <input type="checkbox" id="auto" class="auto-bottom" style="right: 10%;width: 15px;height: 15px;">
-            <label for="auto" class="auto-bottom" title="Auto scroll to the bottom when new message come" style="right: 8%">Auto</label>
+            <input type="checkbox" id="auto" class="auto-chkbox" style="right: 10%;width: 15px;height: 15px;">
+            <label for="auto" class="auto-chkbox" title="Auto scroll to the bottom when new message come" style="right: 8%">Auto</label>
             <button>Send</button>
         </form>
     </div>
@@ -42,20 +44,26 @@
             if(username!=''){
                 socket.emit('login',username);
                 $('.login').hide('1000');
+                $('#showName').text('Nickname: ' + username);
             }
             else{
                 alert("Nickname can't be empty!")
             }
         });
 
+        //Receive online users number
+        socket.on('numChange',function(num){
+            $('#showUserOnline').text('Now online: ' + num);
+        })
+
         //Broadcast login
         socket.on('userLogin',function(name){
-            var content = '<div class="user-join-leave">————Welcome ' + name +' join————</div>';
+            var content = '<div class="user-join-leave">————Welcome<span style="font-weight:bold;"> ' + name + ' </span>join————</div>';
             $('#chat').append(content);
         })
         //Broadcast logout
         socket.on('userLogout',function(name){
-            var content = '<div class="user-join-leave">————User ' + name +' leave————</div>';
+            var content = '<div class="user-join-leave">————User<span style="font-weight:bold;"> ' + name +' </span>leave————</div>';
             $('#chat').append(content);
         })
 
@@ -74,10 +82,9 @@
                 sendMsg();
             }
         });
-        
         //Receive message
         socket.on('broadcast', function(data){
-            $('#chat').append($('<li>').text(data));
+            $('#chat').append($('<li>').html('<span style="color: red;">' + data.username + '</span> : ' + data.data));
             if($("#auto")[0].checked){
                 $(".history")[0].scrollTop = $(".history")[0].scrollHeight;
             }

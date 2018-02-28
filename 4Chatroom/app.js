@@ -11,6 +11,7 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
 	var username = 'unnamed';
 	userOnline++;
+	io.emit('numChange',userOnline);
 	console.log('a user connected. Online ' + userOnline);
 
 	socket.on('login',function(data){
@@ -18,15 +19,20 @@ io.on('connection', function(socket){
 		console.log(data + ' login');
 		io.emit('userLogin', username);
 	});
+
+	// socket.on('getNum',function(){
+	// 	io.emit('getNum',userOnline);
+	// });
 	
-	socket.on('message', function(data){
-		console.log(username + ' send message: ' + data);
-		io.emit('broadcast', data);
+	socket.on('message', function(msg){
+		console.log(username + ' send message: ' + msg);
+		io.emit('broadcast', {username:username, data:msg});
 	});
 
 	socket.on('disconnect', function(){
 		userOnline--;
 		console.log('User ' + username +' disconnected. Online ' + userOnline);
+		io.emit('numChange', userOnline);
 		io.emit('userLogout', username);
 	});
 });
