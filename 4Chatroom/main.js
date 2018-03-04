@@ -1,5 +1,5 @@
 var socket = io.connect('http://localhost:3000');
-var username = null;
+var username;
 
 //Login
 $('.login form').submit(function(event){
@@ -27,8 +27,10 @@ socket.on('userLogin',function(name){
 })
 //Broadcast logout
 socket.on('userLogout',function(name){
-    var content = '<div class="user-join-leave">————User<span style="font-weight:bold;"> ' + name +' </span>leave————</div>';
-    $('#chat').append(content);
+    if(name!='unnamed'){
+        var content = '<div class="user-join-leave">————User<span style="font-weight:bold;"> ' + name +' </span>leave————</div>';
+        $('#chat').append(content);
+    }
 })
 
 //Send message
@@ -48,7 +50,12 @@ $('.sending textarea').keypress(function(event){
 });
 //Receive message
 socket.on('broadcast', function(data){
-    $('#chat').append($('<li>').html(data.time + '@<span style="color: red;">' + data.username + '</span> : ' + data.data));
+    if(username == data.username){
+        content = data.time + '@<b><span style="color: red;">' + data.username + '</span> : ' + data.data + '</b>';
+    }else{
+        content = data.time + '@<span style="color: red;">' + data.username + '</span> : ' + data.data;
+    }
+    $('#chat').append($('<li>').html(content));
     if($("#auto")[0].checked){
         $(".history")[0].scrollTop = $(".history")[0].scrollHeight;
     }
