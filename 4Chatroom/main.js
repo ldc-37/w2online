@@ -8,10 +8,10 @@ $('.login form').submit(function(event){
     if(username!=''){
         socket.emit('login',username);
         $('.login').hide('1000');
-        $('#showName').text('Nickname: ' + username);
+        $('#showName').text('Your nickname: ' + username);
     }
     else{
-        alert("Nickname can't be empty!")
+        alert("Nickname can't be empty!");
     }
 });
 
@@ -48,7 +48,7 @@ $('.sending textarea').keypress(function(event){
 });
 //Receive message
 socket.on('broadcast', function(data){
-    $('#chat').append($('<li>').html('<span style="color: red;">' + data.username + '</span> : ' + data.data));
+    $('#chat').append($('<li>').html(data.time + '@<span style="color: red;">' + data.username + '</span> : ' + data.data));
     if($("#auto")[0].checked){
         $(".history")[0].scrollTop = $(".history")[0].scrollHeight;
     }

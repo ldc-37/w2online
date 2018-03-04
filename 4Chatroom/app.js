@@ -12,26 +12,24 @@ io.on('connection', function(socket){
 	var username = 'unnamed';
 	userOnline++;
 	io.emit('numChange',userOnline);
-	console.log('a user connected. Online ' + userOnline);
+	console.log('a user connected. Online: ' + userOnline);
 
 	socket.on('login',function(data){
 		username = data;
 		console.log(data + ' login');
 		io.emit('userLogin', username);
 	});
-
-	// socket.on('getNum',function(){
-	// 	io.emit('getNum',userOnline);
-	// });
 	
 	socket.on('message', function(msg){
-		console.log(username + ' send message: ' + msg);
-		io.emit('broadcast', {username:username, data:msg});
+		var t = new Date();
+		var nowTime = t.getHours() + ':' + t.getMinutes() + ':' + t.getSeconds();
+		console.log(nowTime + ' : \"' + username + '\" send message: ' + msg);
+		io.emit('broadcast', {username:username, data:msg, time:nowTime});
 	});
 
 	socket.on('disconnect', function(){
 		userOnline--;
-		console.log('User ' + username +' disconnected. Online ' + userOnline);
+		console.log('User \"' + username +'\" disconnected. Online: ' + userOnline);
 		io.emit('numChange', userOnline);
 		io.emit('userLogout', username);
 	});
