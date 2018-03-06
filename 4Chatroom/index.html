@@ -12,7 +12,7 @@
             <h3>Welcome!<br>Please input your nickname:</h3>
             <form autocomplete="off">
                 <input type="text" name="username" id="username" maxlength="12">
-                <br><br>
+                <p id="errName">ERROR:Nickname can't be empty!</p>
                 <button>Enter</button>
             </form>
         </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="sending">
         <form action="">
-            <textarea id="msg" name="message"></textarea>
+            <textarea id="msg" name="message" placeholder="Message here...."></textarea>
             <input type="checkbox" id="auto" class="auto-chkbox" style="right: 10%;width: 15px;height: 15px;">
             <label for="auto" class="auto-chkbox" title="Auto scroll to the bottom when new message come" style="right: 8%">Auto</label>
             <button>Send</button>

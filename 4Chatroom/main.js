@@ -1,7 +1,21 @@
 var socket = io.connect('http://localhost:3000');
 var username;
 
+$(function(){
+    $('.sending button').mouseenter(function(){
+        $('.sending button').stop(true);
+        $('.sending button').animate({fontSize: '18px', padding: '9px'}, 50);
+    });
+    $('.sending button').mouseleave(function(){
+        $('.sending button').animate({fontSize: '15px', padding: '11px'}, 50);
+    });
+})
+
 //Login
+$('.login form input').focus(function(){
+    $('#errName').css('display','none');
+    $('.login button').css('marginTop','20px');
+});
 $('.login form').submit(function(event){
     event.preventDefault();
     username = $('#username').val();
@@ -11,7 +25,8 @@ $('.login form').submit(function(event){
         $('#showName').text('Your nickname: ' + username);
     }
     else{
-        alert("Nickname can't be empty!");
+        $('#errName').css('display','inherit');
+        $('.login button').css('marginTop','3px');
     }
 });
 
@@ -51,7 +66,7 @@ $('.sending textarea').keypress(function(event){
 //Receive message
 socket.on('broadcast', function(data){
     if(username == data.username){
-        content = data.time + '@<b><span style="color: red;">' + data.username + '</span> : ' + data.data + '</b>';
+        content = data.time + '@<b><span style="color: red;">' + data.username + '</span> : ' + data.data + '</b>' + '<a href="javascript:;" ondblclick="withdraw(this.parentNode)">[Withdraw]</a>';
     }else{
         content = data.time + '@<span style="color: red;">' + data.username + '</span> : ' + data.data;
     }
@@ -59,4 +74,11 @@ socket.on('broadcast', function(data){
     if($("#auto")[0].checked){
         $(".history")[0].scrollTop = $(".history")[0].scrollHeight;
     }
+});
+
+function withdraw(msg){
+    socket.emit('withdraw');
+}
+socket.on('withdraw',function(msg){
+    //waiting...
 });
