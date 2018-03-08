@@ -21,7 +21,7 @@ $('.login form').submit(function(event){
     username = $('#username').val();
     if(username!=''){
         socket.emit('login',username);
-        $('.login').hide('1000');
+        $('.login').fadeOut('1000');
         $('#showName').text('Your nickname: ' + username);
     }
     else{
@@ -66,7 +66,7 @@ $('.sending textarea').keypress(function(event){
 //Receive message
 socket.on('broadcast', function(data){
     if(username == data.username){
-        content = data.time + '@<b><span style="color: red;">' + data.username + '</span> : ' + data.data + '</b>' + '<a href="javascript:;" ondblclick="withdraw(this.parentNode)">[Withdraw]</a>';
+        content = data.time + '@<b><span style="color: red;">' + data.username + '</span> : ' + data.data + '</b>';
     }else{
         content = data.time + '@<span style="color: red;">' + data.username + '</span> : ' + data.data;
     }
@@ -77,7 +77,7 @@ socket.on('broadcast', function(data){
 });
 
 function withdraw(msg){
-    socket.emit('withdraw');
+    socket.emit('withdraw');//waiting...
 }
 socket.on('withdraw',function(msg){
     //waiting...

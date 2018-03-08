@@ -13,7 +13,7 @@ textarea {position: fixed;width: 80%;margin-left: 8%;font-size: 18px;border: 3px
 .user-join-leave {text-align: center;color: #6c543f;background-color: #f6e39c;padding: 1px;margin: auto;}
 #errName {display: none;font-size: 12px;color: red;margin-right: 10%;}
 #chat {margin: 1% 10% 0;padding: 0;list-style: none;font-size: 20px;}
-#chat li {padding: 5px 20px;background: rgba(9, 176, 183, 0.15);}
-#chat li:nth-child(odd) {background: rgba(88,105,180,0.45);}
+#chat li {padding: 5px 20px;background: rgba(9, 176, 183, 0.1);}
+#chat li:nth-child(odd) {background: lightblue;}
 #showName {position: fixed;left: 6%;top: 5%;}
 #showUserOnline {position: fixed;right: 6%;top: 5%;}
