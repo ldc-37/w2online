@@ -1,14 +1,24 @@
 var socket = io.connect('http://localhost:3000');
 var username;
 
-$(function(){
-    $('.sending button').mouseenter(function(){
-        $('.sending button').stop(true);
-        $('.sending button').animate({fontSize: '18px', padding: '9px'}, 50);
-    });
-    $('.sending button').mouseleave(function(){
-        $('.sending button').animate({fontSize: '15px', padding: '11px'}, 50);
-    });
+//sendBtn animate
+$('.sending button').mouseenter(function(){
+    $('.sending button').stop(true);
+    $('.sending button').animate({fontSize: '18px', padding: '9px'}, 50);
+});
+$('.sending button').mouseleave(function(){
+    $('.sending button').animate({fontSize: '15px', padding: '11px'}, 50);
+});
+//nameInput animate
+$('#username').focus(function(){
+    $('#username').animate({width: '300px'}, 100);
+    $('#username').css('border-bottom','3px solid white');
+    $('#username').css('padding-top','+=1px');
+});
+$('#username').blur(function(){
+    $('#username').animate({width: '250px'}, 100);
+    $('#username').css('border-bottom','2px solid white');
+    $('#username').css('padding-top','-=1px');
 })
 
 //Login
