@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello vue</title>
+</head>
+<body>
+    <div id="hello">
+        <p>{{message}}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script>
+        let vue = new Vue({
+            el: '#hello',
+            data: {
+                message: 'Hello Vue!',
+            }
+        });
+    </script>    
+</body>
+</html>
