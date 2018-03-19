@@ -5,9 +5,9 @@
     <input v-model="newItem" @keyup.enter="add" class="add">
     <input type="button" value="add" @click="add" class="add">
     <ul>
-      <div  v-for="item in items">
+      <div v-for="item in items">
       <input type="checkbox" :checked="item.isFinished">
-      <li :class="[item.isFinished ? 'finished' : '']" @click="toggleFinish(item)">{{ item.index }}.{{ item.lable }}</li>
+      <li :class="[item.isFinished ? 'finished' : '']" @click="toggleFinish(item)">{{ item.index }}.{{ item.label }}</li>
       <!-- or: v-bind:class="{finished: item.isFinished}" -->
       <span @click="remove(item.index)">✖</span>
       </div>
@@ -16,18 +16,19 @@
 </template>
 
 <script>
+let len = 2;
 export default {
   data () {
     return {
       title: 'Todolist with Vue',
       items: [
         {
-          lable: 'an example',
+          label: 'an example',
           index: 0,
           isFinished: true
         },
         {
-          lable: '(click here to finish)',
+          label: '(click here to finish)',
           index: 1,
           isFinished: false
         }
@@ -40,9 +41,9 @@ export default {
       item.isFinished = !item.isFinished;
     },
     add: function () { //it seems that meaning of 'this' will change when using "arrow function"
-      this.items.push ({
-        lable: this.newItem,
-        index: this.items[this.items.length-1].index + 1,
+      len = this.items.push ({
+        label: this.newItem,
+        index: len, //this.items[this.items.length-1].index + 1,
         isFinished: false
       });
       this.newItem = '';
@@ -52,6 +53,7 @@ export default {
       for(let i = 0;i<this.items.length;i++){
         this.items[i].index = i;
       }
+      len--;
     }
   }
 }
