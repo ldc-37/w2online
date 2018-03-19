@@ -16,7 +16,7 @@
 </template>
 
 <script>
-let len = 2;
+// let len = 2;
 export default {
   data () {
     return {
@@ -40,10 +40,10 @@ export default {
     toggleFinish: (item) => {
       item.isFinished = !item.isFinished;
     },
-    add: function () { //it seems that meaning of 'this' will change when using "arrow function"
-      len = this.items.push ({
+    add: function () { //the meaning of 'this' will change when using "arrow function"
+      this.items.push ({
         label: this.newItem,
-        index: len, //this.items[this.items.length-1].index + 1,
+        index: this.items.length,
         isFinished: false
       });
       this.newItem = '';
@@ -53,7 +53,6 @@ export default {
       for(let i = 0;i<this.items.length;i++){
         this.items[i].index = i;
       }
-      len--;
     }
   }
 }
