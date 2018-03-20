@@ -3,34 +3,49 @@
     <img src="./assets/logo.png">
     <h2>{{ title }}</h2>
     <input v-model="newItem" @keyup.enter="add" class="add">
+    <!-- difference between 'add()' & 'and'? -->
     <input type="button" value="add" @click="add" class="add">
     <ul>
       <div v-for="item in items">
       <input type="checkbox" :checked="item.isFinished">
-      <li :class="[item.isFinished ? 'finished' : '']" @click="toggleFinish(item)">{{ item.index }}.{{ item.label }}</li>
-      <!-- or: v-bind:class="{finished: item.isFinished}" -->
-      <span @click="remove(item.index)">✖</span>
+      <span>{{ item.index }}-</span>
+
+      <input type="text" class="edit"
+      v-model="item.label"
+      v-if="item.isEditing"
+      @keyup.enter="toggleEditStatus(item.index)"
+      @blur="toggleEditStatus(item.index)">
+
+      <li
+      :class="{finished: item.isFinished}"
+      @click="toggleFinish(item)"
+      v-if="!item.isEditing"
+      >{{ item.label }}.&nbsp;</li>
+
+      <span @click="toggleEditStatus(item.index)" title="编辑/完成编辑">✏</span>
+      <span @click="remove(item.index)" title="删除该项">✖</span>
       </div>
     </ul>
   </div>
 </template>
 
 <script>
-// let len = 2;
 export default {
   data () {
     return {
       title: 'Todolist with Vue',
       items: [
         {
-          label: 'an example',
+          label: 'a finished example',
           index: 0,
-          isFinished: true
+          isFinished: true,
+          isEditing: false
         },
         {
           label: '(click here to finish)',
           index: 1,
-          isFinished: false
+          isFinished: false,
+          isEditing: false
         }
       ],
       newItem: ''
@@ -44,9 +59,13 @@ export default {
       this.items.push ({
         label: this.newItem,
         index: this.items.length,
-        isFinished: false
+        isFinished: false,
+        isEditing: false
       });
       this.newItem = '';
+    },
+    toggleEditStatus: function (index) {
+      this.items[index].isEditing = !this.items[index].isEditing;
     },
     remove: function (index) {
       this.items.splice(index,1);
@@ -65,8 +84,10 @@ ul li,span {display: inline-block;cursor: pointer;}
 .finished {text-decoration: line-through;color: gray;}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-size: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+.edit {font-size: 20px;}
 </style>
