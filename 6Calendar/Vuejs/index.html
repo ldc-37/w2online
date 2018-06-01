@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calendar-Vuejs</title>
+    <link rel="stylesheet" href="./main.css">
+    <script src="./vue.js"></script>
+</head>
+<body> <!-- ClearChoosing() here? -->
+    <div id="calendar">
+        <div class="header">
+            <button class="jump" title="Pervious year" @click="FillPreYear()">&lt;&lt;</button>
+            <button class="jump" title="Previous month" @click="FillPreMonth()">&lt;·</button>
+            &nbsp;&nbsp;&nbsp;
+            <div class="now">
+                <span id="thisYear" title="Choose year" @click="ChooseYear()"> {{ year }}</span>
+                <div class="choose-time" v-if="choosingYear"><li v-for="years in yearList" @click="SetDates(years,month)">{{ years }}</li></div>
+                /
+                <span id="thisMonth" title="Choose month" @click="ChooseMonth()">{{ month }}</span>
+                <div class="choose-time" v-if="choosingMonth"><li v-for="months in monthList" @click="SetDates(year,months)">{{ months }}</li></div>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <button class="jump" title="Next month" @click="FillNextMonth()">·&gt;</button>
+            <button class="jump" title="Next year" @click="FillNextYear()">&gt;&gt;</button>
+        </div>
+        <ul class="weekname">
+            <li style="color:orangered">Sun</li>
+            <li>Mon</li>
+            <li>Tues</li>
+            <li>Wed</li>
+            <li>Thur</li>
+            <li>Fri</li>
+            <li style="color:orangered">Sat</li>
+        </ul>
+        <!-- <br><hr><br> -->
+        <ul class="main">
+            <li v-for="(dayObj, index) in days" v-bind:class="{ weekend: dayObj.isWeekend, 'not-this-month': !dayObj.isThisMonth, selected: (daySelected == index), today: dayObj.isToday }" @click="SelectDay(index)">{{ dayObj.date }}</li>
+        </ul>
+        <div class="footer"></div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>
